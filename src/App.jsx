@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import className from 'classnames/bind';
 import { Button } from './components/button/Button';
 import styles from './style.scss';
+import { Aside } from './components/Aside/Aside';
 
 const cx = className.bind(styles);
 
@@ -11,8 +12,8 @@ export class App extends Component {
     isOpenModal: false,
   };
 
-  handleToggleAside = (e) => {
-    e.stopPropagation();
+  handleToggleAside = () => {
+    // e.stopPropagation();
     const { isOpenAside } = this.state;
     this.setState({ isOpenAside: !isOpenAside });
   };
@@ -24,11 +25,13 @@ export class App extends Component {
   };
 
   render() {
+    const { isOpenAside, isOpenModal } = this.state;
     return (
       <div>
+        <Aside isOpenAside={isOpenAside} placement="right" />
         <div className={cx('box')}>
-          <Button onClick={this.handleToggleAside} type="button" text={this.isOpenAside ? 'Close Aside' : 'Open Aside'} />
-          <Button onClick={this.handleToggleModal} type="button" text={this.isOpenAside ? 'Close Modal' : 'Open Modal'} />
+          <Button onClick={this.handleToggleAside} type="button" text={isOpenAside ? 'Close Aside' : 'Open Aside'} />
+          <Button onClick={this.handleToggleModal} type="button" text={isOpenModal ? 'Close Modal' : 'Open Modal'} />
         </div>
       </div>
     );
