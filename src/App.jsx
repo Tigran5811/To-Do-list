@@ -11,12 +11,14 @@ export class App extends Component {
     isOpenModal: false,
   };
 
-  handleToggleAside = () => {
+  handleToggleAside = (e) => {
+    e.stopPropagation();
     const { isOpenAside } = this.state;
     this.setState({ isOpenAside: !isOpenAside });
   };
 
-  handleToggleModal = () => {
+  handleToggleModal = (e) => {
+    e.stopPropagation();
     const { isOpenModal } = this.state;
     this.setState({ isOpenModal: !isOpenModal });
   };
