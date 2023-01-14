@@ -21,6 +21,7 @@
         "linebreak-style": "off",
         "react/prop-types": "off",
         "no-shadow": "off",
-        "react/button-has-type":"off"
+        "react/button-has-type":"off",
+        "react/state-in-constructor" :"off"
     }
 }
