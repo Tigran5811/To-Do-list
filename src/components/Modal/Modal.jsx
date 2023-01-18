@@ -6,13 +6,14 @@ const cx = classNames.bind(styles);
 
 export class Modal extends Component {
   render() {
-    const { isOpenAside, children } = this.props;
+    const { isOpenModal, children } = this.props;
     return (
       <div className={
         cx(
           'modal',
           {
-            open: isOpenAside,
+            open: isOpenModal,
+
           },
         )
       }
