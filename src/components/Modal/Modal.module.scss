@@ -1,19 +1,18 @@
 .modal {
-    position: absolute;
+
     display: none;
     width: 400px;
     height: 300px;
     background-color: red;
-    top: 150px;
-    left: calc(50% - 400px/2);
+    // top: 150px;
+    // left: calc(50% - 400px/2);
     border-radius: 20px;
 }
 
 .open {
-    display: block;
     display: flex;
     justify-content: center;
     flex-direction: column;
-   gap: 20px;
-   align-items: center;
+    gap: 20px;
+    align-items: center;
 }
