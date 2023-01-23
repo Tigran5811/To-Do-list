@@ -16,6 +16,10 @@ export class Home extends Component {
     this.setState({ isOpenAside: !isOpenAside });
   };
 
+  handleLogOut = () => {
+    localStorage.removeItem('token');
+  };
+
   render() {
     const { isOpenAside } = this.state;
     return (
@@ -23,7 +27,7 @@ export class Home extends Component {
       <div className={styles.box}>
         <Aside isOpenAside={isOpenAside} />
         <div className={styles.cont}>
-          <Header openAside={this.handleToggleAside} />
+          <Header openAside={this.handleToggleAside} logOut={this.handleLogOut} />
         </div>
       </div>
     );

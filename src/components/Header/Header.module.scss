@@ -1,6 +1,21 @@
-Header{
-   padding: 60px 20px;
-   background-color: rebeccapurple;
+header {
+   position: sticky;
+   padding: 0 20px;
+   background-color: bisque;
    width: 100%;
-   
+  
+   min-height: 60px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   top:0;
+
+   & a {
+      background-color: #000;
+      border-radius: 20px;
+      padding: 10px 15px;
+      font-size: 22px;
+      color: #fff;
+
+   }
 }

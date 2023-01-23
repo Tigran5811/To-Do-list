@@ -4,6 +4,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Counter } from './pages/Counter/Counter';
 import { Home } from './pages/Home/Home';
+import { Login } from './pages/auth/Login/Login';
+import { Register } from './pages/auth/Register/Register';
+import { PrivateRoute } from './components/routes/PrivateRoute';
+import { PublicRoute } from './components/routes/PublicRoute';
 
 // import { Header } from './components/Header/Header';
 
@@ -12,8 +16,10 @@ export class App extends Component {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/counter" element={<Counter />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/counter" element={<PrivateRoute><Counter /></PrivateRoute>} />
+          <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
         </Routes>
       </BrowserRouter>
     );

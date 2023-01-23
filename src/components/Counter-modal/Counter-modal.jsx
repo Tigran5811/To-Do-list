@@ -9,7 +9,6 @@ const cx = classNames.bind(styles);
 export class CounterModal extends Component {
   state = {
     count: 0,
-    close: false,
   };
 
   handleAddition = () => {
@@ -22,23 +21,27 @@ export class CounterModal extends Component {
     this.setState({ count: count - 1 });
   };
 
-  HandleClose = () => {
-    const { close } = this.state;
-    this.setState({ close: !close });
-    console.log(close);
-  };
+  // HandleClose = (e) => {
+  //   e.stopPropagation();
+  //   const { isOpenModal } = this.props;
+  //   this.setState({ isOpenModal });
+  // };
 
   render() {
-    const { count, close } = this.state;
-    const { isOpenModal } = this.props;
-
+    const { count } = this.state;
+    const { isOpenModal, handleToggleModal } = this.props;
     return (
       <div
         role="button"
-        onClick={this.HandleClose}
-        className={cx({ container: isOpenModal, close_modal: close })}
+        onClick={handleToggleModal}
+        className={cx('container', { openModal: isOpenModal })}
       >
-        <Modal isOpenModal={isOpenModal}>
+        <Modal
+          role="button"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           <div className={cx('btn_cont')}>
             <Button onClick={this.handleAddition} type="button" text="addition" />
             <Button onClick={this.handleDeduction} type="button" text="deduction" />

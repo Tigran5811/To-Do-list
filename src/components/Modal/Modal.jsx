@@ -6,18 +6,9 @@ const cx = classNames.bind(styles);
 
 export class Modal extends Component {
   render() {
-    const { isOpenModal, children } = this.props;
+    const { children, onClick } = this.props;
     return (
-      <div className={
-        cx(
-          'modal',
-          {
-            open: isOpenModal,
-
-          },
-        )
-      }
-      >
+      <div onClick={onClick} role="button" className={cx('modal')}>
         {children}
 
       </div>

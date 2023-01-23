@@ -6,6 +6,12 @@
     border-radius: 30px;
 
     &:hover {
-        opacity: 0.6;
+       background-color: rgb(134, 122, 122) ;
     }
+}
+
+.disabled{
+    &:hover {
+        background-color: #000;
+     }
 }
