@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import React, { Component } from 'react';
 import styles from './Aside.module.scss';
-import { Nav } from './Nav';
+import { Nav } from './Nav/Nav';
 
 const cx = classNames.bind(styles);
 

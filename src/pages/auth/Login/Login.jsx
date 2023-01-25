@@ -6,7 +6,6 @@ import styles from './Login.module.scss';
 import { Button } from '../../../components/Button/Button';
 
 const cx = classNames.bind(styles);
-// const users = [{ email: 'aaaa', password: 'bbbb' }, { email: 'cccc', password: 'dddd' }];
 export class Login extends Component {
   state = {
     login: '',

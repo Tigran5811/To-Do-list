@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import { Counter } from './pages/Counter/Counter';
 import { Home } from './pages/Home/Home';
 import { Login } from './pages/auth/Login/Login';
 import { Register } from './pages/auth/Register/Register';
 import { PrivateRoute } from './components/routes/PrivateRoute';
 import { PublicRoute } from './components/routes/PublicRoute';
-
-// import { Header } from './components/Header/Header';
 
 export class App extends Component {
   render() {

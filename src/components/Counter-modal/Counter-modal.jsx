@@ -21,12 +21,6 @@ export class CounterModal extends Component {
     this.setState({ count: count - 1 });
   };
 
-  // HandleClose = (e) => {
-  //   e.stopPropagation();
-  //   const { isOpenModal } = this.props;
-  //   this.setState({ isOpenModal });
-  // };
-
   render() {
     const { count } = this.state;
     const { isOpenModal, handleToggleModal } = this.props;
