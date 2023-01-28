@@ -4,7 +4,5 @@ import { App } from './App';
 import './reset.scss';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-
   <App />,
-
 );

@@ -1,16 +1,22 @@
-.box1 {
-   width: 100%;
-   height: 100vh;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 10px;
-}
-
 .box {
    display: flex;
+   overflow: visible;
+}
+
+.box1 {
+   padding-top: 20px;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   gap: 20px;
+   flex: 1;
 }
 
 .cont {
    width: 100%;
+   display: flex;
+   flex-direction: column;
 }
+

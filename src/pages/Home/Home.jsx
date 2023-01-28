@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-
 import styles from './Home.module.scss';
 import { Header } from '../../components/Header/Header';
 import { Aside } from '../../components/Aside/Aside';
-
-// const cx = classNames.bind(styles);
 
 export class Home extends Component {
   state = {
@@ -16,6 +13,10 @@ export class Home extends Component {
     this.setState({ isOpenAside: !isOpenAside });
   };
 
+  handleLogOut = () => {
+    localStorage.removeItem('token');
+  };
+
   render() {
     const { isOpenAside } = this.state;
     return (
@@ -23,7 +24,7 @@ export class Home extends Component {
       <div className={styles.box}>
         <Aside isOpenAside={isOpenAside} />
         <div className={styles.cont}>
-          <Header openAside={this.handleToggleAside} />
+          <Header openAside={this.handleToggleAside} logOut={this.handleLogOut} />
         </div>
       </div>
     );
