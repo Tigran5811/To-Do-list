@@ -6,6 +6,7 @@ import { Login } from './pages/auth/Login/Login';
 import { Register } from './pages/auth/Register/Register';
 import { PrivateRoute } from './components/routes/PrivateRoute';
 import { PublicRoute } from './components/routes/PublicRoute';
+import { Users } from './pages/Users/Users';
 
 export class App extends Component {
   render() {
@@ -16,6 +17,7 @@ export class App extends Component {
           <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
           <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+          <Route path="/users" element={<PrivateRoute><Users /></PrivateRoute>} />
         </Routes>
       </BrowserRouter>
     );

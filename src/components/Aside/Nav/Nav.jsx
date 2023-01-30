@@ -35,6 +35,13 @@ export class Nav extends Component {
           Register
 
         </NavLink>
+        <NavLink
+          style={getActiveStyle}
+          to="/users"
+        >
+          Users
+
+        </NavLink>
       </nav>
     );
   }
