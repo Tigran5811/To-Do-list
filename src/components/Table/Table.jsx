@@ -8,11 +8,15 @@ export class Table extends Component {
       <table>
         <thead />
         <tbody>
-          {data.map((item) => (
-            <tr key={item.id}>
-              <td>
-                {item}
-              </td>
+          {data.map(({
+            id, email, website, phone, username,
+          }) => (
+            <tr key={id}>
+              <td>{id}</td>
+              <td>{email}</td>
+              <td>{website}</td>
+              <td>{phone}</td>
+              <td>{username}</td>
             </tr>
           ))}
         </tbody>
