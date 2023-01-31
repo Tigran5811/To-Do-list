@@ -27,7 +27,9 @@
         "jsx-a11y/click-events-have-key-events":"off",
         "react/no-unused-state":"off",
         "react/destructuring-assignment":"off",
-        "class-methods-use-this":"off"
+        "class-methods-use-this":"off",
+        "react/no-array-index-key":"off",
+        "react/function-component-definition":"off"
 
     }
 }

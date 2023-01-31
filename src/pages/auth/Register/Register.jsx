@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Input } from '../../../components/Input/Input';
 import styles from './Register.module.scss';
 import { Button } from '../../../components/Button/Button';
+import { withRouter } from '../../../hocs/withRouter';
 
 const cx = classNames.bind(styles);
 
-export class Register extends Component {
+class Register extends Component {
   state = {
     login: '',
     password: '',
@@ -25,23 +26,28 @@ export class Register extends Component {
     const {
       login, password, name, age,
     } = this.state;
+    const {
+      navigate,
+    } = this.props;
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     users.push({
       login, password, name, age,
     });
     localStorage.setItem('users', JSON.stringify(users));
-    if (users.length > 0) {
+    const foundUsers = users.find((item) => item.login === login && item.password === password);
+    if (foundUsers) {
       localStorage.setItem('token', true);
-      this.setState({ isLoggedIn: true });
+      return navigate('/');
     }
+    return navigate('/login');
   };
 
   render() {
     const {
-      login, password, isLoggedIn, name, age,
+      login, password, name, age,
     } = this.state;
 
-    return isLoggedIn ? <Navigate to="/" /> : (
+    return (
       <div className={cx('container')}>
         <form onSubmit={this.onSubmit}>
           <Input value={login} onChange={this.onChange} placeholder="Email" type="text" name="login" />
@@ -55,3 +61,5 @@ export class Register extends Component {
     );
   }
 }
+
+export default withRouter(Register);

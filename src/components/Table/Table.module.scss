@@ -1,0 +1,26 @@
+table {
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+tr,
+td,
+th {
+    border: 1px solid;
+
+}
+
+td,
+th {
+    padding: 10px;
+
+}
+
+tbody tr:hover {
+    background-color: antiquewhite;
+}
+
+.pointer {
+    cursor: pointer;
+}
