@@ -5,6 +5,7 @@ import { Input } from '../../../components/Input/Input';
 import styles from './Login.module.scss';
 import { Button } from '../../../components/Button/Button';
 import { withRouter } from '../../../hocs/withRouter';
+import { Consumer } from '../../../context/AuthContext';
 
 const cx = classNames.bind(styles);
 
@@ -18,7 +19,7 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = (e) => {
+  onSubmit = (e, handleLogIn) => {
     e.preventDefault();
     const { login, password } = this.state;
     const { navigate } = this.props;
@@ -26,7 +27,7 @@ class Login extends Component {
     const foundUsers = users.find((item) => item.login === login && item.password === password);
 
     if (foundUsers) {
-      localStorage.setItem('token', true);
+      handleLogIn(true);
       return navigate('/');
     }
 
@@ -36,14 +37,22 @@ class Login extends Component {
   render() {
     const { login, password } = this.state;
     return (
-      <div className={cx('container')}>
-        <form onSubmit={this.onSubmit}>
-          <Input value={login} onChange={this.onChange} placeholder="Email" type="text" name="login" />
-          <Input value={password} onChange={this.onChange} placeholder="password" type="text" name="password" />
-          <Button disabled={!login || !password} type="submit" text="Log In" />
-        </form>
-        <Link to="/register">Register</Link>
-      </div>
+      <Consumer>
+        { ({ handleLogIn }) => (
+          <div className={cx('container')}>
+            <form onSubmit={(event) => {
+              this.onSubmit(event, handleLogIn);
+            }}
+            >
+              <Input value={login} onChange={this.onChange} placeholder="Email" type="text" name="login" />
+              <Input value={password} onChange={this.onChange} placeholder="password" type="text" name="password" />
+              <Button disabled={!login || !password} type="submit" text="Log In" />
+            </form>
+            <Link to="/register">Register</Link>
+          </div>
+        )}
+      </Consumer>
+
     );
   }
 }

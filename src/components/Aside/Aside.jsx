@@ -9,18 +9,8 @@ export class Aside extends Component {
   render() {
     const { isOpenAside } = this.props;
     return (
-      <aside className={
-        cx(
-          'aside',
-          {
-            open: isOpenAside,
-
-          },
-        )
-}
-      >
+      <aside className={cx('aside', { open: isOpenAside })}>
         <Nav />
-
       </aside>
     );
   }

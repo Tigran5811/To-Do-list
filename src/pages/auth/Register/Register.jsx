@@ -34,11 +34,6 @@ class Register extends Component {
       login, password, name, age,
     });
     localStorage.setItem('users', JSON.stringify(users));
-    const foundUsers = users.find((item) => item.login === login && item.password === password);
-    if (foundUsers) {
-      localStorage.setItem('token', true);
-      return navigate('/');
-    }
     return navigate('/login');
   };
 
