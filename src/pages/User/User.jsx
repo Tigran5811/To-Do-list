@@ -13,7 +13,8 @@ class User extends Component {
 
   getUser = async () => {
     const { id } = this.props.searchParams;
-    const user = await API.user.getUser(+id);
+    console.log(this.props);
+    const user = await API.user.getUser(id);
     this.setState({ user });
   };
 

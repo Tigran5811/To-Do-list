@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import { Input } from '../../../components/Input/Input';
+import { Input } from '../../../ui-kit/components/Input/Input';
 import styles from './Login.module.scss';
-import { Button } from '../../../components/Button/Button';
+import { Button } from '../../../ui-kit/components/Button/Button';
 import { withRouter } from '../../../hocs/withRouter';
-import { Consumer } from '../../../context/AuthContext';
+import { withProvider } from '../../../hocs/withProvider';
+import { API } from '../../../api';
 
 const cx = classNames.bind(styles);
 
 class Login extends Component {
   state = {
-    login: '',
+    email: '',
     password: '',
   };
 
@@ -19,42 +20,36 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = (e, handleLogIn) => {
+  onSubmit = async (e, handleLogIn) => {
     e.preventDefault();
-    const { login, password } = this.state;
+    const { email, password } = this.state;
     const { navigate } = this.props;
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const foundUsers = users.find((item) => item.login === login && item.password === password);
-
-    if (foundUsers) {
-      handleLogIn(true);
+    const user = await API.auth.signIn({ email, password });
+    if (user) {
+      handleLogIn(user.token);
       return navigate('/');
     }
 
-    return navigate('/login');
+    return navigate('/signin');
   };
 
   render() {
-    const { login, password } = this.state;
+    const { email, password } = this.state;
+    const { handleLogIn } = this.props;
     return (
-      <Consumer>
-        { ({ handleLogIn }) => (
-          <div className={cx('container')}>
-            <form onSubmit={(event) => {
-              this.onSubmit(event, handleLogIn);
-            }}
-            >
-              <Input value={login} onChange={this.onChange} placeholder="Email" type="text" name="login" />
-              <Input value={password} onChange={this.onChange} placeholder="password" type="text" name="password" />
-              <Button disabled={!login || !password} type="submit" text="Log In" />
-            </form>
-            <Link to="/register">Register</Link>
-          </div>
-        )}
-      </Consumer>
-
+      <div className={cx('container')}>
+        <form onSubmit={(event) => {
+          this.onSubmit(event, handleLogIn);
+        }}
+        >
+          <Input value={email} onChange={this.onChange} placeholder="Email" type="text" name="email" />
+          <Input value={password} onChange={this.onChange} placeholder="password" type="text" name="password" />
+          <Button disabled={!email || !password} type="submit" text="Sign In" />
+        </form>
+        <Link to="/register">Register</Link>
+      </div>
     );
   }
 }
 
-export default withRouter(Login);
+export default withRouter(withProvider(Login));

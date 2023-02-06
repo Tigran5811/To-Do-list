@@ -2,8 +2,8 @@ import axios from './axios';
 
 export const getUsers = async () => axios({
   method: 'GET',
-  url: 'users',
-}, false);
+  url: 'user',
+}, localStorage.getItem('token'));
 
 export const getUser = async (id) => {
   const users = await getUsers();

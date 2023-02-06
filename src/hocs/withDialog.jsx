@@ -1,7 +1,7 @@
 import React from 'react';
-import { Consumer } from '../context/AuthContext';
+import { Consumer } from '../context/DialogsContext';
 
-export const withProvider = (Component) => class Wrapper extends React.Component {
+export const withDialog = (Component) => class Wrapper extends React.Component {
   render() {
     return (
       <Consumer>

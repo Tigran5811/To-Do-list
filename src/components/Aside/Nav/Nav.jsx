@@ -23,9 +23,9 @@ export class Nav extends Component {
         </NavLink>
         <NavLink
           style={getActiveStyle}
-          to="/login"
+          to="/signin"
         >
-          Login
+          Sign In
 
         </NavLink>
         <NavLink
@@ -40,6 +40,13 @@ export class Nav extends Component {
           to="/users"
         >
           Users
+
+        </NavLink>
+        <NavLink
+          style={getActiveStyle}
+          to="/todolist"
+        >
+          To Do List
 
         </NavLink>
       </nav>

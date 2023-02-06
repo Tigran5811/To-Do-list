@@ -5,7 +5,13 @@
 }
 .btn_cont{
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    width: 400px;
+    height: 300px;
+    border-radius: 20px;
+
 }
 .container{
     top: 0;
@@ -16,7 +22,7 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    z-index: 9999;
+    z-index: 1001;
 }
 .openModal{
     display: flex;

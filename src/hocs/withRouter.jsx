@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { parse } from 'qs';
 
 export const withRouter = (Component) => {
-  const Wrapper = () => {
+  const Wrapper = (props) => {
     const navigate = useNavigate();
     const params = useParams();
     const location = useLocation();
@@ -15,6 +15,7 @@ export const withRouter = (Component) => {
         params={params}
         location={location}
         searchParams={searchParams}
+        {...props}
       />
     );
   };

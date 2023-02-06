@@ -6,13 +6,17 @@ export class AuthProvider extends Component {
     token: null,
   };
 
+  componentDidMount() {
+    this.setState({ token: localStorage.getItem('token') });
+  }
+
   handleLogOut = () => {
     localStorage.removeItem('token');
     this.setState({ token: null });
   };
 
   handleLogIn = (token) => {
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', JSON.stringify(token));
     this.setState({ token });
   };
 

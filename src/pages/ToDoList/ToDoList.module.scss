@@ -1,0 +1,85 @@
+.wrapper {
+
+    padding: 60px 10%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    background-color: rgb(244, 245, 168);
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    & h1 {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    & button {
+        width: 25%;
+        border-radius: 0;
+    }
+
+    & input {
+        width: 75%;
+        border-radius: 0;
+
+    }
+
+    & div {
+        width: 100%;
+    }
+}
+
+.todolist {
+    width: 100%;
+    background-color: #f1f1f1;
+
+    & .todolistCont {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        align-items: center;
+        padding-left: 45px;
+        font-size: 22px;
+
+        &:hover {
+            background-color: #cec7c7;
+        }
+
+        & button {
+            color: red;
+            border-radius: 0;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+
+            &:hover {
+                background-color: #000;
+                ;
+            }
+        }
+    }
+}
+
+.checked {
+    background-color: rgb(90, 84, 84);
+}
+
+.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #000;
+    border-style: solid;
+    border-width: 0 5px 5px 0;
+    left: 20px;
+    transform: rotate(45deg);
+    height: 20px;
+    width: 10px;
+}

@@ -10,7 +10,7 @@ export class PrivateRoute extends Component {
           ({ token }) => {
             const { children } = this.props;
             if (!token) {
-              return <Navigate to="/login" />;
+              return <Navigate to="/signin" />;
             }
             return children;
           }

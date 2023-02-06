@@ -7,11 +7,11 @@ const cx = classNames.bind(styles);
 export class Button extends Component {
   render() {
     const {
-      text, type, onClick, disabled,
+      text, type, onClick, disabled, token,
     } = this.props;
 
     return (
-      <button disabled={disabled} onClick={onClick} className={cx('button', { disabled })} type={type}>{text}</button>
+      <button disabled={disabled} onClick={onClick} className={cx('button', { disabled })} type={type} token={token}>{text}</button>
     );
   }
 }
