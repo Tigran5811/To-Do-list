@@ -11,7 +11,7 @@ export class ToDoList extends Component {
     text: '',
     isRender: null,
     toDoList: [],
-    checked: false,
+    checked: true,
   };
 
   componentDidMount() {
@@ -44,13 +44,27 @@ export class ToDoList extends Component {
     return null;
   };
 
-  onChecked = () => {
-    const { checked } = this.state;
-    this.setState({ checked: !checked });
-  };
+  // onChecked = (e) => {
+  //   const { Checked } = this.state;
+  //   const toDoList = JSON.parse(localStorage.getItem('toDoList'));
+  //   const result = toDoList.find(() => {
+  //     if (e.target.checked === true) {
+  //       return this.setState({ isChecked: !Checked });
+  //     }
+
+  //     return this.setState({ isChecked: Checked });
+  //   });
+  // };
+
+  // onCheckedTo = () => {
+  //   const { checked } = this.state;
+  //   this.setState({ checked: !checked });
+  // };
 
   render() {
-    const { text, toDoList, checked } = this.state;
+    const {
+      text, toDoList, checked,
+    } = this.state;
     return (
       <div className={styles.wrapper}>
         <div className={styles.container}>
@@ -62,7 +76,7 @@ export class ToDoList extends Component {
         </div>
         <div className={styles.todolist}>
           {toDoList && toDoList.map((item, index) => (
-            <div key={index} className={cx('todolistCont', { checked })} role="button" onClick={this.onChecked}>
+            <div key={index} defaultChecked={checked} type="checkbox" className={cx('todolistCont', { checked })} role="button" onClick={this.onChecked}>
               {item}
               <Button onClick={this.onRemoveList} text="X" token={item} />
             </div>
