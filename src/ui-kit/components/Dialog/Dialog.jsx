@@ -6,27 +6,22 @@ import { withDialog } from '../../../hocs/withDialog';
 
 Modal.setAppElement('#root');
 
-class Dialog extends React.Component {
-  render() {
-    const {
-      isOpen, closeDialog, label, children,
-    } = this.props;
-    return (
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={closeDialog}
-        style={customStyles}
-        contentLabel={label}
-      >
-        <Button
-          onClick={closeDialog}
-          type="button"
-          text="Close Dialog"
-        />
-        {children}
-      </Modal>
-    );
-  }
-}
+const Dialog = ({
+  isOpen, closeDialog, label, children,
+}) => (
+  <Modal
+    isOpen={isOpen}
+    onRequestClose={closeDialog}
+    style={customStyles}
+    contentLabel={label}
+  >
+    <Button
+      onClick={closeDialog}
+      type="button"
+      text="Close Dialog"
+    />
+    {children}
+  </Modal>
+);
 
 export default withDialog(Dialog);

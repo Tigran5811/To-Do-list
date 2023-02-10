@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { Button } from '../../ui-kit/components/Button/Button';
 import { Input } from '../../ui-kit/components/Input/Input';
@@ -6,46 +6,37 @@ import styles from './ToDoList.module.scss';
 
 const cx = classNames.bind(styles);
 
-export class ToDoList extends Component {
-  state = {
-    text: '',
-    isRender: null,
-    toDoList: [],
-    checked: true,
+export const ToDoList = () => {
+  const [text, setText] = useState('');
+  const [toDoList, setToDoList] = useState(JSON.parse(localStorage.getItem('toDoList')) || []);
+
+  useEffect(() => {
+    setToDoList(toDoList);
+  }, toDoList);
+
+  const onChange = (e) => {
+    setText(e.target.value);
   };
 
-  componentDidMount() {
-    this.setState({ toDoList: JSON.parse(localStorage.getItem('toDoList')) || [] });
-  }
-
-  onChange = (e) => {
-    this.setState({ text: e.target.value });
-  };
-
-  onRemoveList = (e) => {
+  const onRemoveList = (e) => {
     e.stopPropagation();
-    const { value } = e.target.attributes[1];
-    const { toDoList } = this.state;
-    const i = toDoList.findIndex((item) => item === value);
+    const i = toDoList.findIndex((item) => item);
     toDoList.splice(i, 1);
-    this.setState({ toDoList });
+    setToDoList(toDoList);
     localStorage.setItem('toDoList', JSON.stringify(toDoList));
   };
 
-  onAddToDoList = () => {
-    const { text, toDoList } = this.state;
+  const onAddToDoList = () => {
     const foundText = toDoList.find((item) => text === item);
     if (!foundText) {
       toDoList.push(text);
       localStorage.setItem('toDoList', JSON.stringify(toDoList));
-      this.setState({ toDoList, text: '' });
-      return this.setState({ isRender: true });
+      setText('');
+      return setToDoList(toDoList);
     }
     return null;
   };
-
-  // onChecked = (e) => {
-  //   const { Checked } = this.state;
+  // const onChecked = (e) => {
   //   const toDoList = JSON.parse(localStorage.getItem('toDoList'));
   //   const result = toDoList.find(() => {
   //     if (e.target.checked === true) {
@@ -61,28 +52,23 @@ export class ToDoList extends Component {
   //   this.setState({ checked: !checked });
   // };
 
-  render() {
-    const {
-      text, toDoList, checked,
-    } = this.state;
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <h1>My To Do List</h1>
-          <div>
-            <Input value={text} onChange={this.onChange} placeholder="Title..." type="text" name="todolist" />
-            <Button disabled={!text} onClick={this.onAddToDoList} text="Add" />
-          </div>
-        </div>
-        <div className={styles.todolist}>
-          {toDoList && toDoList.map((item, index) => (
-            <div key={index} defaultChecked={checked} type="checkbox" className={cx('todolistCont', { checked })} role="button" onClick={this.onChecked}>
-              {item}
-              <Button onClick={this.onRemoveList} text="X" token={item} />
-            </div>
-          ))}
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <h1>My To Do List</h1>
+        <div>
+          <Input value={text} onChange={onChange} placeholder="Title..." type="text" name="text" />
+          <Button disabled={!text} onClick={onAddToDoList} text="Add" />
         </div>
       </div>
-    );
-  }
-}
+      <div className={styles.todolist}>
+        {toDoList && toDoList.map((item, index) => (
+          <div key={index} type="checkbox" className={cx('todolistCont', {})} role="button">
+            {item}
+            <Button onClick={onRemoveList} text="X" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};

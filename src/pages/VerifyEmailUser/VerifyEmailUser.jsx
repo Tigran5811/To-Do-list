@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { API } from '../../api';
@@ -8,36 +8,29 @@ import { Input } from '../../ui-kit/components/Input/Input';
 import { Button } from '../../ui-kit/components/Button/Button';
 
 const cx = classNames.bind(styles);
-class VerifyEmailUser extends Component {
-  state = {
-    token: '',
+
+const VerifyEmailUser = ({ navigate }) => {
+  const [token, setToken] = useState('');
+
+  const onChange = (e) => {
+    setToken({ token: e.target.value });
   };
 
-  onChange = (e) => {
-    this.setState({ token: e.target.value });
-  };
-
-  onSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const { token } = this.state;
-    const { navigate } = this.props;
     await API.auth.VerifyEmail({ token });
     return navigate('/signin');
   };
 
-  render() {
-    const { token } = this.state;
-
-    return (
-      <div className={cx('container')}>
-        <form onSubmit={this.onSubmit}>
-          <Input value={token} onChange={this.onChange} placeholder="Token" type="text" name="token" />
-          <Button disabled={!token} type="submit" text="Authorization" />
-        </form>
-        <Link to="/register">Register</Link>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={cx('container')}>
+      <form onSubmit={onSubmit}>
+        <Input value={token} onChange={onChange} placeholder="Token" type="text" name="token" />
+        <Button disabled={!token} type="submit" text="Authorization" />
+      </form>
+      <Link to="/register">Register</Link>
+    </div>
+  );
+};
 
 export default withRouter(VerifyEmailUser);

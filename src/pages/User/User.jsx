@@ -1,34 +1,25 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { API } from '../../api';
 import { withRouter } from '../../hocs/withRouter';
 
-class User extends Component {
-  state = {
-    user: {},
-  };
-
-  componentDidMount() {
-    this.getUser();
-  }
-
-  getUser = async () => {
-    const { id } = this.props.searchParams;
-    console.log(this.props);
+const User = ({ searchParams }) => {
+  const [user, setUser] = useState({});
+  const getUser = async () => {
+    const { id } = searchParams;
     const user = await API.user.getUser(id);
-    this.setState({ user });
+    setUser({ user });
   };
+  useEffect(() => {
+    getUser();
+  });
 
-  render() {
-    const { user } = this.state;
-
-    return (
-      <div>
-        <h1>{user.id}</h1>
-        <h2>{user.name}</h2>
-        <h3>{user.email}</h3>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>{user.id}</h1>
+      <h2>{user.name}</h2>
+      <h3>{user.email}</h3>
+    </div>
+  );
+};
 
 export default withRouter(User);

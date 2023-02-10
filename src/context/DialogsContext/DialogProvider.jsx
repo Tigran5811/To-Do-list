@@ -1,31 +1,25 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Provider } from './index';
 
-export class DialogProvider extends Component {
-  state = {
-    dialogId: null,
+export const DialogProvider = ({ children }) => {
+  const [dialogId, setDialogId] = useState(null);
+
+  const openDialog = (dialogId) => {
+    setDialogId(dialogId);
   };
 
-  openDialog = (dialogId) => {
-    this.setState({ dialogId });
+  const closeDialog = () => {
+    setDialogId(null);
   };
 
-  closeDialog = () => {
-    this.setState({ dialogId: null });
-  };
-
-  render() {
-    const { children } = this.props;
-    const { dialogId } = this.state;
-    return (
-      <Provider value={{
-        dialogId,
-        openDialog: this.openDialog,
-        closeDialog: this.closeDialog,
-      }}
-      >
-        {children}
-      </Provider>
-    );
-  }
-}
+  return (
+    <Provider value={{
+      dialogId,
+      openDialog,
+      closeDialog,
+    }}
+    >
+      {children}
+    </Provider>
+  );
+};

@@ -1,37 +1,31 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Provider } from './index';
 
-export class AuthProvider extends Component {
-  state = {
-    token: null,
-  };
+export const AuthProvider = ({ children }) => {
+  const [token, setToken] = useState(null);
 
-  componentDidMount() {
-    this.setState({ token: localStorage.getItem('token') });
-  }
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+  });
 
-  handleLogOut = () => {
+  const handleLogOut = () => {
     localStorage.removeItem('token');
-    this.setState({ token: null });
+    setToken(null);
   };
 
-  handleLogIn = (token) => {
+  const handleLogIn = (token) => {
     localStorage.setItem('token', JSON.stringify(token));
-    this.setState({ token });
+    setToken(token);
   };
 
-  render() {
-    const { children } = this.props;
-    const { token } = this.state;
-    return (
-      <Provider value={{
-        token,
-        handleLogOut: this.handleLogOut,
-        handleLogIn: this.handleLogIn,
-      }}
-      >
-        {children}
-      </Provider>
-    );
-  }
-}
+  return (
+    <Provider value={{
+      token,
+      handleLogOut,
+      handleLogIn,
+    }}
+    >
+      {children}
+    </Provider>
+  );
+};

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './Counter.module.scss';
 import { Button } from '../../ui-kit/components/Button/Button';
@@ -7,20 +7,17 @@ import { withDialog } from '../../hocs/withDialog';
 
 const cx = classNames.bind(styles);
 
-class Counter extends Component {
-  onOpenDialog = () => {
-    const { openDialog } = this.props;
+const Counter = ({ openDialog }) => {
+  const onOpenDialog = () => {
     openDialog(dialogs.CounterDialog);
   };
 
-  render() {
-    return (
-      <div className={cx('box1', { })}>
-        <Button onClick={this.onOpenDialog} type="button" text="Open Modal" />
-      </div>
+  return (
+    <div className={cx('box1', {})}>
+      <Button onClick={onOpenDialog} type="button" text="Open Modal" />
+    </div>
 
-    );
-  }
-}
+  );
+};
 
 export default withDialog(Counter);
